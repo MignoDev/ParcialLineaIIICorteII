@@ -1,13 +1,16 @@
 package com.example.ParcialCorteII.Services;
 
 import com.example.ParcialCorteII.Models.Entrenador;
+import com.example.ParcialCorteII.Models.Equipo;
 import com.example.ParcialCorteII.Models.Partido;
+import com.example.ParcialCorteII.Models.PartidoDetalle;
 import com.example.ParcialCorteII.Repositories.EntrenadorRepository;
 import com.example.ParcialCorteII.Repositories.PartidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PartidoService {
@@ -24,6 +27,18 @@ public class PartidoService {
     public Partido buscarPorId(int id)
     {
         return repository.getReferenceById(id);
+    }
+
+    public List<PartidoDetalle> detallePartidos() {
+//        List<Object[]> result = repository.detallePartidos();
+//
+//        return result.stream().map(row -> {
+//           Partido p = (Partido) row[0];
+//           Equipo tl = (Equipo) row[1];
+//           Equipo tv = (Equipo) row[2];
+//           return new PartidoDetalle(p, tl, tv);
+//        }).toList();
+        return repository.detallePartidos();
     }
 
     public void crear(Partido input)

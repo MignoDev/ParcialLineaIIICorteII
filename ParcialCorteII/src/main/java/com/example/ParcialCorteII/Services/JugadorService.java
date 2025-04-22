@@ -49,8 +49,10 @@ public class JugadorService {
         repository.deleteById(id);
     }
 
-    public List<Object[]> jugadorEquipo(int equipo)
+    public List<Jugador> jugadorEquipo(int equipo)
     {
         return repository.buscaJugadoresEquipo(equipo);
     }
+
+    public List<Jugador> buscarJugadoresGoleadores(int goles) { return repository.buscarJugadoresGoleadores(goles); }
 }

@@ -11,6 +11,15 @@ import java.util.List;
 @Repository
 public interface JugadorRepository extends JpaRepository<Jugador, Integer> {
 
-    @Query("select p from jugador p where p.idEquipo = :id")
-    List<Object[]> buscaJugadoresEquipo(@Param("id") int id);
+    @Query(value = "select * from jugador p where p.id_equipo = :id", nativeQuery = true)
+    List<Jugador> buscaJugadoresEquipo(@Param("id") int id);
+
+    @Query(value = """
+            SELECT j.*
+            FROM jugador j
+            JOIN estadisticas_jugador e ON j.id_jugador = e.id_jugador
+            GROUP BY j.id_jugador
+            HAVING SUM(e.goles) >= :goles
+        """, nativeQuery = true)
+    List<Jugador> buscarJugadoresGoleadores(@Param("goles") int goles);
 }

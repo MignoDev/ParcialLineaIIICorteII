@@ -25,6 +25,11 @@ public class EquipoService {
         return repository.getReferenceById(id);
     }
 
+    public int golesTotales(int idEquipo)
+    {
+        return repository.totalGoles(idEquipo);
+    }
+
     public void crear(Equipo input)
     {
         repository.save(input);

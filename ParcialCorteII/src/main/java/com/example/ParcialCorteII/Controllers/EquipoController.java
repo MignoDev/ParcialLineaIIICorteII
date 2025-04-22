@@ -46,6 +46,18 @@ public class EquipoController {
         }
     }
 
+    @GetMapping("/goles/{idEquipo}")
+    public ResponseEntity<?> golesTotales(@PathVariable int idEquipo)
+    {
+        try{
+            int response = service.golesTotales(idEquipo);
+            return ResponseEntity.ok(response);
+        }catch ( Exception e)
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ha ocurrido un error en el servidor");
+        }
+    }
+
     @PostMapping("")
     public ResponseEntity<?> crear(@RequestBody Equipo input)
     {

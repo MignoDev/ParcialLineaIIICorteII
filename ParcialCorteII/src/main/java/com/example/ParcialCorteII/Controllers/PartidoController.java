@@ -1,6 +1,7 @@
 package com.example.ParcialCorteII.Controllers;
 
 import com.example.ParcialCorteII.Models.Partido;
+import com.example.ParcialCorteII.Models.PartidoDetalle;
 import com.example.ParcialCorteII.Services.PartidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,18 @@ public class PartidoController {
             return ResponseEntity.ok(response);
         } catch ( Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ha ocurrido un error en el servidor");
+        }
+    }
+
+    @GetMapping("/detalle")
+    public ResponseEntity<?> detallePartidos()
+    {
+        try{
+            List<PartidoDetalle> response = service.detallePartidos();
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ha ocurrido un error en el servidor" + e.getMessage());
         }
     }
 

@@ -21,7 +21,7 @@ public class Partido {
     private int idEquipoLocal;
 
     @ManyToOne
-    @JoinColumn(name = "equipoo_local", insertable = false, updatable = false)
+    @JoinColumn(name = "equipo_local", insertable = false, updatable = false)
     @JsonIgnore
     private Equipo equipoLocal;
 

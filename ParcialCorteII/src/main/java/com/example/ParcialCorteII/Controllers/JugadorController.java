@@ -51,7 +51,18 @@ public class JugadorController {
     public ResponseEntity<?> jugadorEquipo(@PathVariable int equipo)
     {
         try{
-            List<Object[]> response = service.jugadorEquipo(equipo);
+            List<Jugador> response = service.jugadorEquipo(equipo);
+            return ResponseEntity.ok(response);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ha ocurrido un error en el servidor");
+        }
+    }
+
+    @GetMapping("/pg/{goles}")
+    public ResponseEntity<?> buscarJugadoresGoleadores(@PathVariable int goles)
+    {
+        try{
+            List<Jugador> response = service.buscarJugadoresGoleadores(goles);
             return ResponseEntity.ok(response);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ha ocurrido un error en el servidor");
