@@ -25,7 +25,7 @@ public class EquipoService {
         return repository.getReferenceById(id);
     }
 
-    public int golesTotales(int idEquipo)
+    public Object[] golesTotales(int idEquipo)
     {
         return repository.totalGoles(idEquipo);
     }

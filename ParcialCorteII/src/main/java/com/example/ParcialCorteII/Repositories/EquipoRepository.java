@@ -9,13 +9,31 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EquipoRepository extends JpaRepository<Equipo, Integer> {
     @Query(value = """
-            SELECT
-                (SELECT COALESCE(SUM(m1.goles_local), 0)
-                 FROM partido m1
-                 WHERE m1.equipo_local = :idEquipo) +
-                (SELECT COALESCE(SUM(m2.goles_visita), 0)
-                 FROM partido m2
-                 WHERE m2.equipo_visita = :idEquipo) AS total_goles;
+            select
+              e.*,
+              (
+                select
+                  (
+                    select
+                      COALESCE(SUM(m1.goles_local), 0)
+                    from
+                      partido m1
+                    where
+                      m1.equipo_local = :idEquipo
+                  ) + (
+                    select
+                      COALESCE(SUM(m2.goles_visita), 0)
+                    from
+                      partido m2
+                    where
+                      m2.equipo_visita = :idEquipo
+                  ) as total_goles
+              ) goles
+            from
+              equipo e
+            where
+              e.id_equipo = :idEquipo
+            group by e.id_equipo
             """, nativeQuery = true)
-    int totalGoles(@Param("idEquipo") int equipo);
+    Object[] totalGoles(@Param("idEquipo") int idEquipo);
 }

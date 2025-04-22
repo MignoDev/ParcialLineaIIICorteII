@@ -50,7 +50,7 @@ public class EquipoController {
     public ResponseEntity<?> golesTotales(@PathVariable int idEquipo)
     {
         try{
-            int response = service.golesTotales(idEquipo);
+            Object[] response = service.golesTotales(idEquipo);
             return ResponseEntity.ok(response);
         }catch ( Exception e)
         {
